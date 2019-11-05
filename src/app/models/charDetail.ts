@@ -1,4 +1,4 @@
-export interface Characters {
+export interface CharDetail {
     id: number;
     name: string;
     thumbnail: string;

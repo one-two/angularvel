@@ -1,0 +1,15 @@
+<article *ngIf="showArticle">
+    <p>details works!</p>
+
+    {{char.description}}
+    {{char.name}}
+    {{char.thumbnail}}
+    <img src="{{char.thumbnail}}">
+</article>
+
+<article *ngIf="!showArticle">
+    <p>details Loading!!</p>
+
+</article>
+
+<a routerLink=''><< back</a>

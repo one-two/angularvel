@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { Md5 } from 'ts-md5/dist/md5';
-import { ConfigService } from '../config.service';
+import { IndexService } from './index.service';
 import { Observable } from 'rxjs';
-import { Characters } from '../characters/characters';
+import { Characters } from '../models/characters';
 
 
 @Component({
@@ -18,19 +18,20 @@ export class IndexComponent implements OnInit {
     headers: string[];
     config: any;
     chars: Characters[] = [];
+    showSection = false;
 
     constructor(
         private route: ActivatedRoute,
         private location: Location,
-        private configService: ConfigService,
+        private indexService: IndexService,
     ) { }
 
     ngOnInit() {
-
-        this.getId();
+        this.getFirst10();
     }
-    showConfigResponse(): void {
-        this.configService.getCharactersResponse()
+
+    showIndexResponse(): void {
+        this.indexService.getCharactersResponse()
             // resp is of type `HttpResponse<Config>`
             .subscribe(resp => {
                 // display its headers
@@ -46,24 +47,22 @@ export class IndexComponent implements OnInit {
                     this.chars.push({
                         id: x.id,
                         name: x.name,
-                        description: x.description,
-                        thumbnail: x.thumbnail.path + x.thumbnail.extension
-                    })
-                    console.log(x)
-                })
-
+                    });
+                    console.log(x);
+                });
+                this.showSection = true;
                 console.log(this.chars);
             });
     }
 
-    getId(): void {
+    getFirst10(): void {
         console.log(this.route.snapshot.paramMap.get('id'));
         this.id = +this.route.snapshot.paramMap.get('id');
         const md5 = new Md5();
         console.log(this.location);
         console.log(md5.appendStr('1572901735' + '327f627a52d8dbc01a3d5064140f196712129bd3' + '185018cbded40bc4dea72bfef68be45f').end());
         //https://gateway.marvel.com:443/v1/public/characters?ts=1572901735&apikey=185018cbded40bc4dea72bfef68be45f&hash=bd731caa191b51297ce83aa3472baf90&limit=10
-        this.showConfigResponse();
+        this.showIndexResponse();
         console.log(this.headers);
         console.log(this.config);
     }
