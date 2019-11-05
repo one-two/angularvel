@@ -1,0 +1,11 @@
+<section *ngIf="!showSection">
+    <p>index Loading!{{id}}</p>
+</section>
+
+<section *ngIf="showSection">
+    <ul>
+        <li *ngFor="let char of chars">
+            <a routerLink='/character/{{char.id}}'>{{char.name}}</a>
+        </li>
+    </ul>
+</section>
