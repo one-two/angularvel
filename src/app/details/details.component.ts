@@ -13,6 +13,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { DetailsService } from './details.service';
 import { CharDetail } from '../models/charDetail';
+import { Title } from '@angular/platform-browser';
 
 @Component({
     selector: 'app-details',
@@ -25,14 +26,20 @@ export class DetailsComponent implements OnInit {
     showArticle = false;
 
     constructor(
+        private titleService: Title,
         private route: ActivatedRoute,
         private location: Location,
         private detailsService: DetailsService,
     ) { }
 
     ngOnInit() {
+        
         this.id = this.route.snapshot.paramMap.get('id');
         this.getCharDetails(this.id);
+    }
+
+    setTitle( newTitle: string) {
+        this.titleService.setTitle( newTitle );
     }
 
     getCharDetails(id: string) {
@@ -47,6 +54,7 @@ export class DetailsComponent implements OnInit {
                     description: resp.description
                 };
                 this.showArticle = true;
+                this.setTitle(`${this.char.name} Detail`);
             });
 
         });

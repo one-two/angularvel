@@ -17,6 +17,7 @@ import { Md5 } from 'ts-md5/dist/md5';
 import { IndexService } from './index.service';
 import { Observable } from 'rxjs';
 import { Character } from '../models/character';
+import { Title } from '@angular/platform-browser';
 
 
 @Component({
@@ -33,6 +34,7 @@ export class IndexComponent implements OnInit {
     showSection = false;
 
     constructor(
+        private titleService: Title,
         private route: ActivatedRoute,
         private location: Location,
         private indexService: IndexService,
@@ -40,7 +42,12 @@ export class IndexComponent implements OnInit {
     ) { }
 
     ngOnInit() {
+        this.setTitle(`Marvel Characters`);
         this.getFirst10();
+    }
+
+    setTitle( newTitle: string) {
+        this.titleService.setTitle( newTitle );
     }
 
     getFirst10(): void {
