@@ -1,24 +1,38 @@
 <div class="row">
-    <div class="column column-2">
-
-    </div>
-    <div class="column column-6">
-        
-    </div>
+    <article *ngIf="showArticle">
+        <div class="column-12">
+            <h1>{{char?.name}} details</h1>
+            <div class="row">
+                <div class="column column-2">
+                    <img src="{{char.thumbnail}}" alt="{{char.name}}" title="{{char.name}}">
+                </div>
+            
+                <div class="column column-6">
+                    <div class="row">
+                        <div class="column column-12">
+                            <span>id:</span> {{char.id}}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="column column-12">
+                            <span>Name:</span> {{char.name}}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="column column-12">
+                                <span>Description:</span> {{char.description}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
 </div>
 
 
-<article *ngIf="showArticle">
-    <p>details works!</p>
-
-    {{char.description}}
-    {{char.name}}
-    {{char.thumbnail}}
-    <img src="{{char.thumbnail}}">
-</article>
 
 <article *ngIf="!showArticle">
-    <p>details Loading!!</p>
+    <p>{{id}} Details Loading...</p>
 </article>
 
 <a routerLink=''><< back</a>

@@ -1,3 +1,13 @@
+/****************************************************/
+// Filename: details.components.ts
+// Created: Marcelo Bosso
+// Change history:
+// 05.11.2019 / Marcelo Bosso
+// 06.11.2019 / Marcelo Bosso
+/****************************************************/
+// Summary: - Show details from "id" character off of marvels endpoint
+/****************************************************/
+
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
@@ -36,7 +46,6 @@ export class DetailsComponent implements OnInit {
                     thumbnail: resp.thumbnail.path + `.` + resp.thumbnail.extension,
                     description: resp.description
                 };
-                console.log(resp);
                 this.showArticle = true;
             });
 

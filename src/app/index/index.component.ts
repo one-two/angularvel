@@ -1,10 +1,22 @@
+/****************************************************/
+// Filename: index.components.ts
+// Created: Marcelo Bosso
+// Change history:
+// 05.11.2019 / Marcelo Bosso
+// 06.11.2019 / Marcelo Bosso
+/****************************************************/
+// Summary: - Get top 10 characters from marvels endpoint
+//          - Navigate to details on click
+/****************************************************/
+
+
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Md5 } from 'ts-md5/dist/md5';
 import { IndexService } from './index.service';
 import { Observable } from 'rxjs';
-import { Characters } from '../models/characters';
+import { Character } from '../models/character';
 
 
 @Component({
@@ -17,7 +29,7 @@ export class IndexComponent implements OnInit {
     public id: number;
     headers: string[];
     config: any;
-    chars: Characters[] = [];
+    chars: Character[] = [];
     showSection = false;
 
     constructor(
@@ -29,6 +41,10 @@ export class IndexComponent implements OnInit {
 
     ngOnInit() {
         this.getFirst10();
+    }
+
+    getFirst10(): void {
+        this.showIndexResponse();
     }
 
     showIndexResponse(): void {
@@ -43,18 +59,9 @@ export class IndexComponent implements OnInit {
                         id: x.id,
                         name: x.name,
                     });
-                    console.log(x);
                 });
                 this.showSection = true;
-                console.log(this.chars);
             });
-    }
-
-    getFirst10(): void {
-        this.id = +this.route.snapshot.paramMap.get('id');
-        const md5 = new Md5();
-        md5.appendStr('1572901735' + '327f627a52d8dbc01a3d5064140f196712129bd3' + '185018cbded40bc4dea72bfef68be45f').end();
-        this.showIndexResponse();
     }
 
     navigateTo(dest: string) {
