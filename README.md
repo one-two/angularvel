@@ -1,6 +1,5 @@
 # Angularvel
 
-Coding project for CI&T test.
 The objetive is a list->details of Marvel characters.
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.17.
 
